@@ -25,3 +25,16 @@ main {
   grid-area: main;
 }
 
+.wrapper {
+  padding: 30px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.wrapper .products-wrapper {
+  width: 60%;
+}
+
+.wrapper .fillter-wrapper {
+  width: 40%;
+}
