@@ -1,20 +1,37 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "../../css/Products/Products.css"
+import ProductModel from './productModel'
+//import Modal from "react-modal"
 function Products(props) {
+  const [product, setProduct] = useState("");
+
+  const openModal = (product) => {
+    setProduct(product)
+  }
+  const closeModel = () => {
+    setProduct(false)
+  }
+
+
   return (
-    <div className="product-wrapper">{props.products.map(ele => (
-      <div className='product-item' key={ele.id}>
-        <div >
-          <img src={ele.imageUrl} alt={ele.title} />
-          <div className='product-desc'>
-            <p>{ele.title}</p>
-            <span>{ele.price}</span>
-          </div>
-          <button>Add to Cart</button>
+    <div className="product-wrapper">{props.products.map(product => (
+      <div className='product-item' key={product.id}>
+
+        <a href='#' onClick={() => openModal(product)}>
+          <img src={product.imageUrl} alt={product.title} />
+        </a>
+        <div className='product-desc'>
+          <p>{product.title}</p>
+          <span>{product.price}</span>
         </div>
+        <button>Add to Cart</button>
+
       </div>
 
-    ))}</div>
+    ))}
+      <ProductModel product={product} closeModel={closeModel} />
+
+    </div>
   )
 }
 
