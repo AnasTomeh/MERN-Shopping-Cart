@@ -14,6 +14,7 @@
         "desc": "this is product 2",
         "price": 40,
         "size": ["XL", "S"]
+        
     },
     {
         "id": "id3",

@@ -1,6 +1,7 @@
 import React, { useState } from 'react'
 import "../../css/Products/Products.css"
 import ProductModel from './productModel'
+
 //import Modal from "react-modal"
 function Products(props) {
   const [product, setProduct] = useState("");
@@ -24,7 +25,7 @@ function Products(props) {
           <p>{product.title}</p>
           <span>{product.price}</span>
         </div>
-        <button>Add to Cart</button>
+        <button onClick={() => props.addToCart(product)}>Add to Cart</button>
 
       </div>
 
