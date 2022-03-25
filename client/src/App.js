@@ -14,6 +14,7 @@ function App() {
   const [size, setSize] = useState("")
   const [cartItems, setCartItems] = useState([JSON.parse(localStorage.getItem('cartItems'))])
 
+  
   const handelFilterBySize = (e) => {
     setSize(e.target.value);
     if (e.target.value === "ALL") {
@@ -22,6 +23,7 @@ function App() {
       let productsClone = [...products];
       let newProducts = productsClone.filter(p => p.size.indexOf(e.target.value) !== -1)
       setProducts(newProducts)
+      //console.log(newProducts)
 
     }
 
@@ -45,24 +47,29 @@ function App() {
       }
     });
     setProducts(newProducts)
+    //console.log(newProducts)
 
   }
 
   const addToCart = (product) => {
-    console.log("added")
+    
     const cartItemsClone = [...cartItems];
+    console.log(product)
+    console.log(cartItems)
     let isProductExsit = false;
     cartItemsClone.forEach(p => {
-
+      //console.log(p)
       if (p.id === product.id) {
         p.qty++
         isProductExsit = true;
       }
     })
     if (isProductExsit) {
-      cartItemsClone.push({ ...product, qty: 1 })
+      cartItemsClone.push({...product, qty: 1 })
     }
     setCartItems(cartItemsClone);
+    
+    
   }
 
   useEffect(()=>{

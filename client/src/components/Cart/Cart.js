@@ -1,6 +1,23 @@
-import React from 'react'
+import React, { useState } from 'react'
 import "../../css/Cart/Cart.css"
+import Checkout from '../CheckoutForm/Checkout'
 function Cart(props) {
+    const [showForm, setShowForm] = useState(false)
+    const [value, setValue] = useState("")
+
+    const submitOreder = (e)=>{
+        e.preventDefault();
+        const order = {
+            name: value.name,
+            email: value.email
+        }
+        console.log(order);
+    }
+
+    const handleChange = (e) => {
+        console.log(e.target.name)
+        setValue((prevState) => ({...prevState, [e.target.name]: e.target.value }))
+    }
     return (
         <div className='cart-warpper'>
             <div className='cart-title'>{props.cartItems.length === 0 ? "Cart Empty" :
@@ -19,13 +36,21 @@ function Cart(props) {
                             <button onClick={() => props.removeFromCart(item)}>
                                 Remove
                             </button>
+
                         </div>
 
                     </div>
                 ))
                 }
             </div>
-
+            {props.cartItems.length !== 0 && <div className='cart-footer'>
+                <div className='total'>Total:{props.cartItems.reduce((acc, p) => {
+                    return acc + p.price
+                }, 0)}$ </div>
+                <button onClick={() => { setShowForm(true) }}>select products</button>
+            </div>}
+            {/*Checkout Form */}
+           <Checkout showForm={showForm} submitOreder={submitOreder} setShowForm={setShowForm} handleChange={handleChange} />
         </div>
     )
 }
