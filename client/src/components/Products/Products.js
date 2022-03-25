@@ -18,6 +18,7 @@ function Products(props) {
     <div className="product-wrapper">{props.products.map(product => (
       <div className='product-item' key={product.id}>
 
+       
         <a href='#' onClick={() => openModal(product)}>
           <img src={product.imageUrl} alt={product.title} />
         </a>
