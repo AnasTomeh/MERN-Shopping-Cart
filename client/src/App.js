@@ -7,6 +7,8 @@ import data from './data.json'
 import Products from './components/Products/Products'
 import Filter from './components/Filtter/Filter'
 import Cart from './components/Cart/Cart';
+import { Provider } from 'react-redux'
+import store from './store/store';
 
 function App() {
   const [products, setProducts] = useState(data)
@@ -14,7 +16,7 @@ function App() {
   const [size, setSize] = useState("")
   const [cartItems, setCartItems] = useState([JSON.parse(localStorage.getItem('cartItems'))])
 
-  
+
   const handelFilterBySize = (e) => {
     setSize(e.target.value);
     if (e.target.value === "ALL") {
@@ -52,7 +54,7 @@ function App() {
   }
 
   const addToCart = (product) => {
-    
+
     const cartItemsClone = [...cartItems];
     console.log(product)
     console.log(cartItems)
@@ -65,14 +67,14 @@ function App() {
       }
     })
     if (isProductExsit) {
-      cartItemsClone.push({...product, qty: 1 })
+      cartItemsClone.push({ ...product, qty: 1 })
     }
     setCartItems(cartItemsClone);
-    
-    
+
+
   }
 
-  useEffect(()=>{
+  useEffect(() => {
     localStorage.setItem('cartItems', JSON.stringify(cartItems))
   }, [cartItems])
 
@@ -81,24 +83,27 @@ function App() {
     setCartItems(cartItemsClone.filter(p => p.id !== product.id))
   }
   return (
-    <div className="layout">
-      <Header />
-      <main>
-        <div className="wrapper">
-          <Products products={products} addToCart={addToCart} />
-          <Filter
-            productsNumber={products.length}
-            handelFilterBySize={handelFilterBySize}
-            handelFilterByOrder={handelFilterByOrder}
-            sort={sort}
-            size={size} />
+    <Provider store={store}>
+      <div className="layout">
+        <Header />
+        <main>
+          <div className="wrapper">
+            <Products products={products} addToCart={addToCart} />
+            <Filter
+              productsNumber={products.length}
+              handelFilterBySize={handelFilterBySize}
+              handelFilterByOrder={handelFilterByOrder}
+              sort={sort}
+              size={size} />
 
 
-        </div>
-        <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
-      </main>
-      <Footer />
-    </div>
+          </div>
+          <Cart cartItems={cartItems} removeFromCart={removeFromCart} />
+        </main>
+        <Footer />
+      </div>
+    </Provider>
+
   );
 }
 
