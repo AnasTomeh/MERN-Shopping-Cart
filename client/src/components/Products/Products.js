@@ -1,7 +1,9 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import "../../css/Products/Products.css"
 import ProductModel from './productModel'
 import Bounce from 'react-reveal/Bounce'
+import {connect} from 'react-redux'
+import { fetchProducts } from '../../store/actions/products'
 
 //import Modal from "react-modal"
 function Products(props) {
@@ -14,10 +16,15 @@ function Products(props) {
     setProduct(false)
   }
 
+useEffect(()=>{
+  props.fetchProducts()
+}, [])
 
   return (
     <Bounce left cascade>
-      <div className="product-wrapper">{props.products.map(product => (
+      <div className="product-wrapper">
+      
+      {props.products && props.product.lenght? props.products.map(product => (
         <div className='product-item' key={product.id}>
 
 
@@ -32,7 +39,7 @@ function Products(props) {
 
         </div>
 
-      ))}
+      )):"Loading"}
         <ProductModel product={product} closeModel={closeModel} />
 
       </div>
@@ -40,4 +47,8 @@ function Products(props) {
   )
 }
 
-export default Products;
+export default connect((state)=>{
+  return {
+    products: state.products.products
+  }
+}, {fetchProducts})(Products);
