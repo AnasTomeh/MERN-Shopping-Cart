@@ -14,7 +14,7 @@ function App() {
   const [products, setProducts] = useState(data)
   const [sort, setSort] = useState("")
   const [size, setSize] = useState("")
-  const [cartItems, setCartItems] = useState([JSON.parse(localStorage.getItem('cartItems'))])
+  const [cartItems, setCartItems] = useState(JSON.parse(localStorage.getItem('cartItems'))|| [])
 
 
   const handelFilterBySize = (e) => {
@@ -74,9 +74,9 @@ function App() {
 
   }
 
-  useEffect(() => {
-    localStorage.setItem('cartItems', JSON.stringify(cartItems))
-  }, [cartItems])
+  // useEffect(() => {
+  //   localStorage.setItem('cartItems', JSON.stringify(cartItems))
+  // }, [cartItems])
 
   const removeFromCart = (product) => {
     const cartItemsClone = [...cartItems];
