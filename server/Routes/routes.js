@@ -18,4 +18,6 @@ router.delete('/api/product/:id', async (req, res) => {
     res.send(deletProduct)
 })
 
+
+
 module.exports = router
