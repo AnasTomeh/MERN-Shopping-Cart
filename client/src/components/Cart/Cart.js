@@ -4,13 +4,11 @@ import Checkout from '../CheckoutForm/Checkout'
 import Bounce from 'react-reveal/Bounce'
 import { connect } from "react-redux"
 import { removeCart } from '../../store/actions/cart'
-import Modal from 'react-modal'
 import OrderModal from './OrderModal'
-import {createOrder, clearOrder} from '../../store/actions/order'
+import { createOrder, clearOrder } from '../../store/actions/order'
 
 function Cart(props) {
     const [showForm, setShowForm] = useState(false)
-    const [order, setOrder] = useState(false)
     const [value, setValue] = useState("")
 
 
