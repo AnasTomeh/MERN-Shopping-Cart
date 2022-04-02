@@ -38,3 +38,24 @@ main {
 .wrapper .fillter-wrapper {
   width: 40%;
 }
+
+.nav-bar ul{
+  display: flex;
+  background-color: #ddd;
+  list-style: none;
+  padding: 20px 35px;
+  
+}
+
+.nav-bar ul li {
+  display: block;
+  background-color: #2e5ea5;
+  color: #ffff;
+  padding: 5px 10px;
+  margin-right: 5px;
+  text-decoration: none;
+}
+
+.nav ul li a.active {
+  background-color: black;
+}
